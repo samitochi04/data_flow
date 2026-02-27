@@ -7,7 +7,8 @@ class BlogPostBase(BaseModel):
     """Base fields for blog posts"""
     title: str = Field(..., min_length=1, max_length=500)
     slug: str = Field(..., min_length=1, max_length=500)
-    content: str = Field(..., min_length=10)
+    content_markdown: str = Field(..., min_length=10)
+    content_html: str = Field(..., min_length=10)
     excerpt: Optional[str] = Field(None, max_length=1000)
     category_id: Optional[int] = None
     topic_cluster_id: Optional[int] = None

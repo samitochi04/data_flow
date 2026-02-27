@@ -381,7 +381,8 @@ def test_create_blog_post(client: TestClient):
         json={
             "title": "My First Post",
             "slug": "my-first-post",
-            "content": "This is comprehensive blog content here."
+            "content_markdown": "This is comprehensive blog content here.",
+            "content_html": "<p>This is comprehensive blog content here.</p>"
         }
     )
     
@@ -410,7 +411,8 @@ def test_create_post_with_category(client: TestClient):
         json={
             "title": "Tech Article",
             "slug": "tech-article",
-            "content": "Technical content here.",
+            "content_markdown": "Technical content here.",
+            "content_html": "<p>Technical content here.</p>",
             "category_id": cat_id
         }
     )
@@ -426,7 +428,8 @@ def test_get_blog_post(client: TestClient):
         json={
             "title": "Get Post Test",
             "slug": "get-post-test",
-            "content": "Test content"
+            "content_markdown": "Test content something",
+            "content_html": "<p>Test content something</p>"
         }
     )
     post_id = create_response.json()["id"]
@@ -444,7 +447,8 @@ def test_list_published_posts(client: TestClient):
         json={
             "title": "Publish Test",
             "slug": "publish-test",
-            "content": "Test content"
+            "content_markdown": "Test content something",
+            "content_html": "<p>Test content something</p>"
         }
     )
     post_id = create_response.json()["id"]
@@ -464,7 +468,8 @@ def test_publish_post(client: TestClient):
         json={
             "title": "Draft Post",
             "slug": "draft-post-pub",
-            "content": "This is a test content with length"
+            "content_markdown": "This is a test content with length",
+            "content_html": "<p>This is a test content with length</p>"
         }
     )
     assert create_response.status_code == 201
@@ -484,7 +489,8 @@ def test_update_blog_post(client: TestClient):
         json={
             "title": "Original Title",
             "slug": "original-slug",
-            "content": "Original content"
+            "content_markdown": "Original content something",
+            "content_html": "<p>Original content something</p>"
         }
     )
     post_id = create_response.json()["id"]
@@ -493,7 +499,8 @@ def test_update_blog_post(client: TestClient):
         f"/posts/{post_id}",
         json={
             "title": "Updated Title",
-            "content": "Updated content"
+            "content_markdown": "Updated content something",
+            "content_html": "<p>Updated content something</p>"
         }
     )
     
@@ -508,7 +515,8 @@ def test_delete_blog_post(client: TestClient):
         json={
             "title": "Delete Me",
             "slug": "delete-me-post",
-            "content": "This is a test content with length"
+            "content_markdown": "This is a test content with length",
+            "content_html": "<p>This is a test content with length</p>"
         }
     )
     assert create_response.status_code == 201
@@ -525,7 +533,8 @@ def test_unique_post_slug(client: TestClient):
         json={
             "title": "First Post",
             "slug": "unique-post-slug-test",
-            "content": "This is a test content with length"
+            "content_markdown": "This is a test content with length",
+            "content_html": "<p>This is a test content with length</p>"
         }
     )
     assert first_response.status_code == 201
@@ -535,7 +544,8 @@ def test_unique_post_slug(client: TestClient):
         json={
             "title": "Second Post",
             "slug": "unique-post-slug-test",
-            "content": "This is a test content with length"
+            "content_markdown": "This is a test content with length",
+            "content_html": "<p>This is a test content with length</p>"
         }
     )
     

@@ -27,23 +27,43 @@ class BlogPost(Base):
     # Core Content
     title: Mapped[str] = mapped_column(String(500), nullable=False)
     slug: Mapped[str] = mapped_column(String(500), nullable=False, unique=True, index=True)
-    content: Mapped[str] = mapped_column(Text, nullable=False)
-    excerpt: Mapped[Optional[str]] = mapped_column(String(1000), nullable=True)
+    excerpt: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    content_markdown: Mapped[str] = mapped_column(Text, nullable=False)
+    content_html: Mapped[str] = mapped_column(Text, nullable=False)
+    
+    # Featured image metadata
+    featured_image_alt: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    featured_image_caption: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Open Graph (Social share) fields
+    og_title: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    og_description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    
+    # Twitter card fields
+    twitter_title: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    twitter_description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    twitter_card_type: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    
+    # SEO Metadata
+    meta_title: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    meta_description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    focus_keyword: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    content_language: Mapped[str] = mapped_column(String(10), nullable=False, default="en")
+    geo_target_country: Mapped[Optional[str]] = mapped_column(String(2), nullable=True)
+    
+    # Content metadata
+    status: Mapped[str] = mapped_column(String(50), nullable=False, default="draft")  # draft, published, archived, scheduled
+    reading_time_minutes: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    word_count: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    table_of_contents_enabled: Mapped[bool] = mapped_column(nullable=False, default=True)
+    ai_generated_flag: Mapped[bool] = mapped_column(nullable=False, default=False)
+    content_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    last_updated_reason: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     # Status & Publishing
-    status: Mapped[str] = mapped_column(String(50), nullable=False, default="draft")  # draft, published, archived, scheduled
     published_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
     scheduled_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
-
-    # SEO Metadata
-    meta_description: Mapped[Optional[str]] = mapped_column(String(160), nullable=True)
-    meta_keywords: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    canonical_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
-
-    # Social Sharing
-    og_title: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
-    og_description: Mapped[Optional[str]] = mapped_column(String(160), nullable=True)
-    twitter_card_type: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)  # summary, summary_large_image
+    last_reviewed_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Analytics & Stats (denormalized for performance)
     view_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
