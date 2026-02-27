@@ -1,4 +1,5 @@
-from app.models.db.user_model import User
+from app.models.db.user_model import User  # noqa: F401
+from app.models.db.category_model import Category  # noqa: F401
 
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, APIRouter, Depends
@@ -10,6 +11,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 # Import routes
 from app.api.routes.user_routes import router as user_router
+from app.api.routes.category_routes import router as category_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -29,6 +31,7 @@ app = FastAPI(title="Data Flow API", lifespan=lifespan)
 
 # Include routes
 app.include_router(user_router)
+app.include_router(category_router)
 
 # Access Database
 router = APIRouter(prefix="/debug")
