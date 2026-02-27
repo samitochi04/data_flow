@@ -17,6 +17,11 @@ python-jose[cryptography]>=3.3.0
 sqlalchemy
 alembic
 asyncpg
+aiosqlite
+
+# Testing
+pytest
+pytest-asyncio
 
 # Environment
 python-dotenv

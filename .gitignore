@@ -8,3 +8,5 @@ QUICK_START.md
 .env
 
 dataflow-venv
+
+__pycache__

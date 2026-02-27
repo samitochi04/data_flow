@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 
 
 class UserCreate(BaseModel):
@@ -25,6 +25,8 @@ class UserUpdate(BaseModel):
 
 class UserOut(BaseModel):
     """Schema for user response (public data)"""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: int
     name: str
     email: str
@@ -33,9 +35,6 @@ class UserOut(BaseModel):
     last_login_at: Optional[datetime] = None
     created_at: datetime
     updated_at: datetime
-
-    class Config:
-        from_attributes = True
 
 
 class UserAdmin(UserOut):

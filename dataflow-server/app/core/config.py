@@ -1,16 +1,16 @@
 from pathlib import Path
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
+
 
 class Settings(BaseSettings):
+    model_config = ConfigDict(env_file=str(Path(__file__).resolve().parents[2] / ".env"))
+    
     POSTGRES_HOST: str
     POSTGRES_PORT: int
     POSTGRES_DB: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
-
-    class Config:
-        env_file = str(Path(__file__).resolve().parents[2] / ".env")
-        env_file_encoding = "utf-8"
 
     
 settings = Settings()

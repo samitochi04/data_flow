@@ -30,7 +30,7 @@ class UserService:
         user_data = {
             "name": data.name,
             "email": data.email,
-            "password_hash": password_hash,
+            "password": password_hash,
             "role": "admin"
         }
 
@@ -53,7 +53,7 @@ class UserService:
             )
 
         # Verify password
-        if not verify_password(password, user.password_hash):
+        if not verify_password(password, user.password):
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid email or password"
