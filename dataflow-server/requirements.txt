@@ -1,0 +1,25 @@
+# Core FastAPI
+fastapi[all] # >=0.128.5
+uvicorn>=0.40.0
+python-multipart>=0.0.6
+
+# Data Validation
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+email-validator>=2.1.0
+
+# Security
+passlib>=1.7.4
+bcrypt>=4.0.0
+python-jose[cryptography]>=3.3.0
+
+# Database
+sqlalchemy
+alembic
+asyncpg
+
+# Environment
+python-dotenv
+
+# Documentation
+scalar-fastapi

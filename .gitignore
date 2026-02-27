@@ -1,0 +1,10 @@
+.mypy_cache
+.vscode
+
+server.md
+PHASE1_COMPLETION.md
+QUICK_START.md
+
+.env
+
+dataflow-venv
