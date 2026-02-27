@@ -29,7 +29,7 @@ class CategoryService:
         # Check if slug already exists
         if await CategoryRepository.slug_exists(data.slug, db):
             raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
+                status_code=status.HTTP_409_CONFLICT,
                 detail=f"Slug '{data.slug}' already exists"
             )
 

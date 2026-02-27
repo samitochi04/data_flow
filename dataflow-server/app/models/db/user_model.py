@@ -30,3 +30,6 @@ class User(Base):
         DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now()
     )
 
+    def __repr__(self) -> str:
+        return f"<User(id={self.id}, email={self.email}, name={self.name}, role={self.role})>"
+

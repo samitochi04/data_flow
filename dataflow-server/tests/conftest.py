@@ -51,6 +51,23 @@ def test_engine_sync():
 
 
 @pytest.fixture(scope="function")
+async def db_session(test_engine_sync):
+    """Async database session for direct repository tests
+    
+    Provides an AsyncSession for testing repository operations directly
+    without going through the HTTP layer.
+    """
+    TestSessionLocal = sessionmaker(
+        test_engine_sync,
+        class_=AsyncSession,
+        expire_on_commit=False
+    )
+    
+    async with TestSessionLocal() as session:
+        yield session
+
+
+@pytest.fixture(scope="function")
 def client(test_engine_sync):
     """FastAPI test client with SQLite database
     
@@ -80,3 +97,4 @@ def client(test_engine_sync):
     
     # Cleanup overrides
     app.dependency_overrides.clear()
+

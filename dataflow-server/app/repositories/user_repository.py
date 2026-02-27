@@ -50,5 +50,5 @@ class UserRepository:
     @staticmethod
     async def delete(user: User, db: AsyncSession) -> None:
         """Delete user"""
-        await db.delete(user)
+        db.delete(user)
         await db.commit()

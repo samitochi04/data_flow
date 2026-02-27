@@ -168,7 +168,7 @@ class CategoryRepository:
             category: Category object to delete
             db: AsyncSession for database operations
         """
-        await db.delete(category)
+        db.delete(category)
         await db.commit()
 
     @staticmethod
